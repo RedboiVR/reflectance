@@ -1,0 +1,77 @@
+[gd_scene format=4 uid="uid://cad8y08awpoec"]
+
+[ext_resource type="Script" uid="uid://cx1hks8vpett" path="res://character_body_2d.gd" id="1_g14j6"]
+[ext_resource type="Texture2D" uid="uid://b72fattomvk0j" path="res://icon.svg" id="2_vbegm"]
+[ext_resource type="Texture2D" uid="uid://5vpgplpiaiso" path="res://Tile.svg" id="3_ehkex"]
+[ext_resource type="Texture2D" uid="uid://0va655addt38" path="res://gun.svg" id="3_xersf"]
+[ext_resource type="Script" uid="uid://bn7oqll8ostyt" path="res://gun.gd" id="4_00tp4"]
+[ext_resource type="Texture2D" uid="uid://dig4th4j3mwhk" path="res://TileRusty.svg" id="4_xersf"]
+[ext_resource type="Script" uid="uid://b5v3l2gcgc5rw" path="res://splat.gd" id="8_xersf"]
+[ext_resource type="PackedScene" uid="uid://cwdp0d50aun46" path="res://ball.tscn" id="9_xersf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0hol4"]
+size = Vector2(127, 169)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kdubu"]
+texture = ExtResource("3_ehkex")
+texture_region_size = Vector2i(160, 160)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-80, -80, 80, -80, 80, 80, -80, 80)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_d21ai"]
+texture = ExtResource("4_xersf")
+texture_region_size = Vector2i(160, 160)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-80, -80, 80, -80, 80, 80, -80, 80)
+
+[sub_resource type="TileSet" id="TileSet_f182q"]
+tile_size = Vector2i(160, 160)
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_kdubu")
+sources/1 = SubResource("TileSetAtlasSource_d21ai")
+
+[node name="Node2D" type="Node2D" unique_id=873523655]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=1337387057]
+script = ExtResource("1_g14j6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=538374752]
+position = Vector2(0, -25)
+scale = Vector2(2, 2)
+shape = SubResource("RectangleShape2D_0hol4")
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D" unique_id=154721768]
+position = Vector2(0, -25.5)
+scale = Vector2(2, 2.6484375)
+texture = ExtResource("2_vbegm")
+
+[node name="Camera2D" type="Camera2D" parent="CharacterBody2D" unique_id=1402345641]
+zoom = Vector2(0.6, 0.6)
+
+[node name="Timer" type="Timer" parent="CharacterBody2D" unique_id=1518725567]
+wait_time = 0.5
+one_shot = true
+
+[node name="gun" type="Sprite2D" parent="CharacterBody2D" unique_id=807308909]
+position = Vector2(-57.00001, -11)
+scale = Vector2(1.2625, 1.48)
+texture = ExtResource("3_xersf")
+script = ExtResource("4_00tp4")
+
+[node name="Normal" type="TileMapLayer" parent="." unique_id=1776926487]
+position = Vector2(-1, 0)
+tile_map_data = PackedByteArray("AAD+/wEAAAAAAAAAAAD//wEAAAAAAAAAAAAAAAEAAAAAAAAAAAABAAEAAAAAAAAAAAD6/wQAAAAAAAAAAAD5/wQAAAAAAAAAAAD4/wQAAAAAAAAAAAD3/wQAAAAAAAAAAAD2/wQAAAAAAAAAAAD2/wMAAAAAAAAAAAD2/wIAAAAAAAAAAAD2/wEAAAAAAAAAAAACAAAAAAAAAAAAAAACAP//AAAAAAAAAAACAP7/AAAAAAAAAAACAP3/AAAAAAAAAAACAPz/AAAAAAAAAAD6/wMAAAAAAAAAAAD2/wAAAAAAAAAAAAD0/wAAAAAAAAAAAADz/wAAAAAAAAAAAADy/wAAAAAAAAAAAADy////AAAAAAAAAADw////AAAAAAAAAADu////AAAAAAAAAADr//3/AAAAAAAAAADr//z/AAAAAAAAAADv////AAAAAAAAAADq//z/AAAAAAAAAADy//7/AAAAAAAAAADy//z/AAAAAAAAAAD2////AAAAAAAAAAD1////AAAAAAAAAADp//z/AAAAAAAAAADo//z/AAAAAAAAAADn//z/AAAAAAAAAADm//z/AAAAAAAAAADl//z/AAAAAAAAAADk//z/AAAAAAAAAADk//v/AAAAAAAAAADk//r/AAAAAAAAAADk//n/AAAAAAAAAADt////AAAAAAAAAADs////AAAAAAAAAADr//7/AAAAAAAAAAD1/wAAAAAAAAAAAAACAAEAAAAAAAAAAAD1//n/AAAAAAAAAAD1//j/AAAAAAAAAAD1//f/AAAAAAAAAAD1//b/AAAAAAAAAADy//3/AAAAAAAAAAACAPv/AAAAAAAAAAACAPr/AAAAAAAAAAD7/wEAAAAAAAAAAAD6/wEAAAAAAAAAAAD6/wIAAAAAAAAAAAD8/wEAAAAAAAAAAAD9/wEAAAAAAAAAAADw//z/AAAAAAAAAADx//z/AAAAAAAAAADw//3/AAAAAAAAAADw//7/AAAAAAAAAADr////AAAAAAAAAAD2//n/AAAAAAAAAAD3//n/AAAAAAAAAAD4//n/AAAAAAAAAAD5//n/AAAAAAAAAAD6//n/AAAAAAAAAAD7//n/AAAAAAAAAAACAPn/AAAAAAAAAAD8//n/AAAAAAAAAAD9//n/AAAAAAAAAAD+//n/AAAAAAAAAAD///n/AAAAAAAAAAAAAPn/AAAAAAAAAAABAPn/AAAAAAAAAAD0//b/AAAAAAAAAADz//b/AAAAAAAAAADy//b/AAAAAAAAAADx//b/AAAAAAAAAADw//b/AAAAAAAAAADv//b/AAAAAAAAAADu//b/AAAAAAAAAADt//b/AAAAAAAAAADs//b/AAAAAAAAAADr//b/AAAAAAAAAADq//b/AAAAAAAAAADp//b/AAAAAAAAAADi//z/AAAAAAAAAADj//z/AAAAAAAAAADh//z/AAAAAAAAAADg//z/AAAAAAAAAADf//z/AAAAAAAAAADe//z/AAAAAAAAAADd//z/AAAAAAAAAADc//z/AAAAAAAAAADY//z/AAAAAAAAAADf//b/AAAAAAAAAADe//b/AAAAAAAAAADd//b/AAAAAAAAAADc//b/AAAAAAAAAADb//b/AAAAAAAAAADa//b/AAAAAAAAAADZ//b/AAAAAAAAAADY//b/AAAAAAAAAADY//f/AAAAAAAAAADY//j/AAAAAAAAAADY//n/AAAAAAAAAADY//r/AAAAAAAAAADY//v/AAAAAAAAAADf//X/AAAAAAAAAADg//X/AAAAAAAAAADh//X/AAAAAAAAAADi//X/AAAAAAAAAADj//X/AAAAAAAAAADk//X/AAAAAAAAAADl//X/AAAAAAAAAADm//X/AAAAAAAAAADn//X/AAAAAAAAAADo//X/AAAAAAAAAADp//X/AAAAAAAAAADc//3/AAAAAAAAAADc//7/AAAAAAAAAADc////AAAAAAAAAADc/wAAAAAAAAAAAADb/wAAAAAAAAAAAADa/wAAAAAAAAAAAADZ/wAAAAAAAAAAAADY/wAAAAAAAAAAAADV//3/AAAAAAAAAADV//7/AAAAAAAAAADV////AAAAAAAAAADX//z/AAAAAAAAAADW//z/AAAAAAAAAADV//z/AAAAAAAAAADY/wEAAAAAAAAAAADY/wIAAAAAAAAAAADY/wMAAAAAAAAAAADX/wMAAAAAAAAAAADW/wMAAAAAAAAAAADV/wMAAAAAAAAAAADU/wMAAAAAAAAAAADT/wMAAAAAAAAAAADS/wMAAAAAAAAAAADS/wIAAAAAAAAAAADS/wEAAAAAAAAAAADS/wAAAAAAAAAAAADU//z/AAAAAAAAAADT//z/AAAAAAAAAADS//z/AAAAAAAAAADR//z/AAAAAAAAAADQ//z/AAAAAAAAAADP//z/AAAAAAAAAADO//z/AAAAAAAAAADR/wAAAAAAAAAAAADQ/wAAAAAAAAAAAADP/wAAAAAAAAAAAADO/wAAAAAAAAAAAADN/wAAAAAAAAAAAADM/wAAAAAAAAAAAADL/wAAAAAAAAAAAADK////AAAAAAAAAADK//7/AAAAAAAAAADK//n/AAAAAAAAAADL//n/AAAAAAAAAADM//n/AAAAAAAAAADN//n/AAAAAAAAAADO//n/AAAAAAAAAADO//r/AAAAAAAAAADO//v/AAAAAAAAAADJ//7/AAAAAAAAAADI//7/AAAAAAAAAADH//7/AAAAAAAAAADH////AAAAAAAAAADG/wAAAAAAAAAAAADF/wAAAAAAAAAAAADE/wAAAAAAAAAAAADB/wAAAAAAAAAAAADB////AAAAAAAAAADB//7/AAAAAAAAAADB//3/AAAAAAAAAADB//z/AAAAAAAAAADC//z/AAAAAAAAAADD//z/AAAAAAAAAADE//z/AAAAAAAAAADE//v/AAAAAAAAAADE//r/AAAAAAAAAADE//n/AAAAAAAAAADF//n/AAAAAAAAAADG//n/AAAAAAAAAADH//n/AAAAAAAAAADI//n/AAAAAAAAAADJ//n/AAAAAAAAAADB/wEAAAAAAAAAAADB/wIAAAAAAAAAAADB/wMAAAAAAAAAAADB/wQAAAAAAAAAAADB/wUAAAAAAAAAAADC/wUAAAAAAAAAAADD/wUAAAAAAAAAAADE/wUAAAAAAAAAAADF/wUAAAAAAAAAAADG/wUAAAAAAAAAAADH/wUAAAAAAAAAAADI/wUAAAAAAAAAAADI/wQAAAAAAAAAAADI/wMAAAAAAAAAAADL////AAAAAAAAAADL/wEAAAAAAAAAAADJ/wUAAAAAAAAAAADK/wUAAAAAAAAAAADL/wUAAAAAAAAAAADM/wUAAAAAAAAAAADN/wUAAAAAAAAAAADO/wUAAAAAAAAAAADG////AAAAAAAAAAA=")
+tile_set = SubResource("TileSet_f182q")
+
+[node name="splat" type="Area2D" parent="." unique_id=2140952405]
+position = Vector2(-640, 1010)
+script = ExtResource("8_xersf")
+
+[node name="ball" parent="." unique_id=1198528222 instance=ExtResource("9_xersf")]
+position = Vector2(959, 72)
+
+[node name="Timer" type="Timer" parent="ball" unique_id=1007668512]
+wait_time = 0.5
+
+[connection signal="timeout" from="CharacterBody2D/Timer" to="CharacterBody2D" method="_on_timer_timeout"]
+[connection signal="timeout" from="ball/Timer" to="ball" method="_on_timer_timeout"]

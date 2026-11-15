@@ -1,0 +1,83 @@
+[gd_scene format=4 uid="uid://cad8y08awpoec"]
+
+[ext_resource type="Script" uid="uid://cx1hks8vpett" path="res://character_body_2d.gd" id="1_g14j6"]
+[ext_resource type="Texture2D" uid="uid://b72fattomvk0j" path="res://icon.svg" id="2_vbegm"]
+[ext_resource type="Texture2D" uid="uid://5vpgplpiaiso" path="res://Tile.svg" id="3_ehkex"]
+[ext_resource type="Texture2D" uid="uid://0va655addt38" path="res://gun.svg" id="3_xersf"]
+[ext_resource type="Script" uid="uid://bn7oqll8ostyt" path="res://gun.gd" id="4_00tp4"]
+[ext_resource type="Texture2D" uid="uid://dig4th4j3mwhk" path="res://TileRusty.svg" id="4_xersf"]
+[ext_resource type="Script" uid="uid://d2luhysmtmm84" path="res://area_2d.gd" id="5_00tp4"]
+[ext_resource type="Texture2D" uid="uid://pii1085bk8o1" path="res://splat.svg" id="6_77dp3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0hol4"]
+size = Vector2(127, 169)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kdubu"]
+texture = ExtResource("3_ehkex")
+texture_region_size = Vector2i(160, 160)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-80, -80, 80, -80, 80, 80, -80, 80)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_d21ai"]
+texture = ExtResource("4_xersf")
+texture_region_size = Vector2i(160, 160)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-80, -80, 80, -80, 80, 80, -80, 80)
+
+[sub_resource type="TileSet" id="TileSet_f182q"]
+tile_size = Vector2i(160, 160)
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_kdubu")
+sources/1 = SubResource("TileSetAtlasSource_d21ai")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7jq77"]
+size = Vector2(368, 101)
+
+[node name="Node2D" type="Node2D" unique_id=873523655]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=1337387057]
+script = ExtResource("1_g14j6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=538374752]
+position = Vector2(0, -25)
+scale = Vector2(2, 2)
+shape = SubResource("RectangleShape2D_0hol4")
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D" unique_id=154721768]
+position = Vector2(0, -25.5)
+scale = Vector2(2, 2.6484375)
+texture = ExtResource("2_vbegm")
+
+[node name="Camera2D" type="Camera2D" parent="CharacterBody2D" unique_id=1402345641]
+zoom = Vector2(0.6, 0.6)
+
+[node name="Timer" type="Timer" parent="CharacterBody2D" unique_id=1518725567]
+wait_time = 2.0
+one_shot = true
+
+[node name="gun" type="Sprite2D" parent="CharacterBody2D" unique_id=807308909]
+position = Vector2(-57.00001, -11)
+scale = Vector2(1.2625, 1.48)
+texture = ExtResource("3_xersf")
+script = ExtResource("4_00tp4")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1776926487]
+tile_map_data = PackedByteArray("AAD9/wEAAAAAAAAAAAD+/wEAAAAAAAAAAAD//wEAAAAAAAAAAAABAAEAAAAAAAAAAAACAAEAAAAAAAAAAAAAAAEAAAAAAAAAAAD8/wEAAAAAAAAAAAD7/wEAAAAAAAAAAAD6/wEAAAAAAAAAAAD5/wEAAAAAAAAAAAD4/wEAAAAAAAAAAAD3/wEAAAAAAAAAAAD2/wEAAAAAAAAAAAD1/wEAAAAAAAAAAAD9/wAAAAAAAAAAAAD8////AAAAAAAAAAD7//7/AAAAAAAAAAD6//3/AAAAAAAAAAD5//3/AAAAAAAAAAA=")
+tile_set = SubResource("TileSet_f182q")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=2122025888]
+position = Vector2(-1340, 194)
+script = ExtResource("5_00tp4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=833629080]
+shape = SubResource("RectangleShape2D_7jq77")
+
+[node name="Sprite2D" type="Sprite2D" parent="Area2D" unique_id=1138084999]
+position = Vector2(0, 37)
+scale = Vector2(1.85, 1)
+texture = ExtResource("6_77dp3")
+
+[connection signal="timeout" from="CharacterBody2D/Timer" to="CharacterBody2D" method="_on_timer_timeout"]
+[connection signal="body_entered" from="Area2D" to="CharacterBody2D" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]
+[connection signal="body_exited" from="Area2D" to="CharacterBody2D" method="_on_area_2d_body_exited"]
